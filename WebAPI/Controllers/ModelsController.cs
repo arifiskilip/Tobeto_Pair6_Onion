@@ -4,16 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-	[Route("api/[controller]/[action]")]
-	[ApiController]
-	public class ModelsController : ControllerBase
-	{
-		private readonly IMediator _mediator;
 
-		public ModelsController(IMediator mediator)
-		{
-			_mediator = mediator;
-		}
+	public class ModelsController : BaseController
+	{
 
 		[HttpPost]
 		public async Task<IActionResult> Add([FromBody] AddModelCommand command)
