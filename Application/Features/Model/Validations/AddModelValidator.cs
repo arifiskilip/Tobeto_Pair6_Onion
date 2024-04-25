@@ -7,13 +7,13 @@ namespace Application.Features
 		public AddModelValidator()
 		{
 			RuleFor(x => x.Name).MinimumLength(2).MaximumLength(50);
-			RuleFor(x => x.Name).Must(StartsWithLetter);
+			RuleFor(x => x.Name).Must(StartsWithLetter).WithMessage("Lütfen geçerli bir model giriniz.");
 		}
 
 		private bool StartsWithLetter(string arg)
 		{
 			//Bir harf ilemi başlıyor
-			return !char.IsLetter(arg[0]);
+			return char.IsLetter(arg[0]);
 		}
 	}
 }

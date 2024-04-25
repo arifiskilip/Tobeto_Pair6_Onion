@@ -1,14 +1,14 @@
 ﻿using Application.Services;
-using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
 
 namespace Application.Features
 {
-	public class GetAllModelByPaginatedCommand:IRequest<GetAllModelByPaginatedResponse>
+	public class GetAllModelByPaginatedCommand:IRequest<GetAllModelByPaginatedResponse>, ISecuredRequest
 	{
 		public int Index { get; set; } = 1;
 		public int Size { get; set; } = 10;
-
+		public string[] RequiredRoles => ["Admin", "Model.Read"];
 
 		public class GetAllModelByPaginatedHandler : IRequestHandler<GetAllModelByPaginatedCommand, GetAllModelByPaginatedResponse>
 		{

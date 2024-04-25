@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Features.Auth.Commands.IndividualRegister;
+using AutoMapper;
 using Domain.Entities;
 
 namespace Application.Features

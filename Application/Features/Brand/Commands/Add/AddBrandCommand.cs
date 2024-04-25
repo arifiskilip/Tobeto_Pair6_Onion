@@ -1,18 +1,18 @@
-﻿using Application.Repositories;
-using Application.Services;
+﻿using Application.Services;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features
 {
-	public class AddBrandCommand : IRequest<AddBrandResponse>
+	public class AddBrandCommand : IRequest<AddBrandResponse>, ISecuredRequest
 	{ 
         public string Name { get; set; }
         public int ModelId { get; set; }
+		public string[] RequiredRoles => ["Admin", "Brand.Write"];
 
-
-        public class AddBrandCommandHandler : IRequestHandler<AddBrandCommand, AddBrandResponse>
+		public class AddBrandCommandHandler : IRequestHandler<AddBrandCommand, AddBrandResponse>
 		{
 			private readonly IBrandService _brandService;
 			private readonly BrandBusinessRules _brandBusinessRules;
@@ -24,6 +24,8 @@ namespace Application.Features
 				_brandBusinessRules = brandBusinessRules;
 				_mapper = mapper;
 			}
+
+
 
 			public async Task<AddBrandResponse> Handle(AddBrandCommand request, CancellationToken cancellationToken)
 			{

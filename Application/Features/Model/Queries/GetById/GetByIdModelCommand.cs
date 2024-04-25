@@ -1,13 +1,15 @@
 ﻿using Application.Services;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
 
 namespace Application.Features
 {
-	public class GetByIdModelCommand : IRequest<GetByIdModelResponse>
+	public class GetByIdModelCommand : IRequest<GetByIdModelResponse>, ISecuredRequest
 	{
         public int Id { get; set; }
 
+		public string[] RequiredRoles => ["Admin", "Model.Read"];
 
 		public class GetByIdModelHandler : IRequestHandler<GetByIdModelCommand, GetByIdModelResponse>
 		{

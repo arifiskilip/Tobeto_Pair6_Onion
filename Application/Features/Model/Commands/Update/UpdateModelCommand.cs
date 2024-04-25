@@ -1,16 +1,16 @@
 ﻿using Application.Repositories;
-using Application.Services;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features
 {
-	public class UpdateModelCommand : IRequest<UpdateModelResponse>
+	public class UpdateModelCommand : IRequest<UpdateModelResponse>, ISecuredRequest
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-
+		public string[] RequiredRoles => ["Admin", "Model.Write"];
 
 		public class UpdateModelHandler : IRequestHandler<UpdateModelCommand, UpdateModelResponse>
 		{
@@ -24,7 +24,6 @@ namespace Application.Features
 				_businessRules = businessRules;
 				_modelDal = modelDal;
 			}
-
 			public async Task<UpdateModelResponse> Handle(UpdateModelCommand request, CancellationToken cancellationToken)
 			{
 				

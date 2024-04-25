@@ -1,4 +1,5 @@
 ﻿using Application.Features;
+using Application.Features.Auth.Rules;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
@@ -24,6 +25,8 @@ namespace Application
 
 			services.AddScoped(typeof(BrandBusinessRules));
 			services.AddScoped(typeof(ModelBusinessRules));
+			services.AddScoped(typeof(IndividualBusinessRuless));
+			services.AddScoped(typeof(CorporateBusinessRuless));
 			return services;
 		}
 	}

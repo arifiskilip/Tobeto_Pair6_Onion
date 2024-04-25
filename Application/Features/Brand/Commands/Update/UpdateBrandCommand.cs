@@ -1,16 +1,19 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features
 {
-	public class UpdateBrandCommand : IRequest<UpdateBrandResponse>
+	public class UpdateBrandCommand : IRequest<UpdateBrandResponse>, ISecuredRequest
 	{
         public int Id { get; set; }
         public string Name { get; set; }
 		public int ModelId { get; set; }
 
+
+		public string[] RequiredRoles => ["Admin", "Brand.Write"];
 
 		public class UpdateBrandHandler : IRequestHandler<UpdateBrandCommand, UpdateBrandResponse>
 		{

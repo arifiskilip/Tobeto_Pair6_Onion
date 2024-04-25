@@ -3,7 +3,6 @@ using Application.Services;
 using Core.CrossCuttingConcers.Exceptions.Types;
 using Core.DataAccess.Paging;
 using Core.Entities;
-using Core.Entities.Enums;
 
 namespace Persistence.Services
 {
@@ -21,12 +20,6 @@ namespace Persistence.Services
 		public async Task<User> AddAsync(User user)
 		{
 			await _userDal.AddAsync(user);
-			await _userRoleService.AddUserRoleAsync(new()
-			{
-				CreatedDate = DateTime.Now,
-				UserId = user.Id,
-				OperationClaimId = (int)RoleEnum.Member,
-			});
 			return user;
 		}
 

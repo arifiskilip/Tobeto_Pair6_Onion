@@ -51,6 +51,7 @@ public class RepositoryBase<TEntity, TId, TContext>
 	public async Task<ICollection<TEntity>> AddRangeAsync(ICollection<TEntity> entities)
 	{
 		await _entity.AddRangeAsync(entities);
+		await _context.SaveChangesAsync();
 		return entities;
 	}
 

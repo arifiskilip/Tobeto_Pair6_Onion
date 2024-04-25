@@ -1,13 +1,14 @@
 ﻿using Application.Repositories;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features
 {
-	public class DeleteBrandCommand : IRequest<DeleteBrandResponse>
+	public class DeleteBrandCommand : IRequest<DeleteBrandResponse>, ISecuredRequest
 	{
         public int Id { get; set; }
-
+		public string[] RequiredRoles => ["Admin", "Brand.Write"];
 
 		public class DeleteBrandHandler : IRequestHandler<DeleteBrandCommand, DeleteBrandResponse>
 		{

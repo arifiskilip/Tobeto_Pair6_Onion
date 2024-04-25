@@ -1,14 +1,15 @@
 ﻿using Application.Repositories;
 using Application.Services;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features
 {
-	public class DeleteModelCommand : IRequest<DeleteModelResponse>
+	public class DeleteModelCommand : IRequest<DeleteModelResponse>, ISecuredRequest
 	{
         public int Id { get; set; }
-
+		public string[] RequiredRoles => ["Admin", "Model.Write"];
 
 		public class DeleteModelHandler : IRequestHandler<DeleteModelCommand, DeleteModelResponse>
 		{

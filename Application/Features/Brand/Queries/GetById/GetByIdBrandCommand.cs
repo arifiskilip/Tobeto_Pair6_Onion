@@ -1,15 +1,16 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features
 {
-	public class GetByIdBrandCommand : IRequest<GetByIdBrandResponse>
+	public class GetByIdBrandCommand : IRequest<GetByIdBrandResponse>, ISecuredRequest
 	{
         public int Id { get; set; }
-
+		public string[] RequiredRoles => ["Admin", "Brand.Read"];
 
 		public class GetByIdBrandHandler : IRequestHandler<GetByIdBrandCommand, GetByIdBrandResponse>
 		{
@@ -23,7 +24,6 @@ namespace Application.Features
 				_mapper = mapper;
 				_businessRules = businessRules;
 			}
-
 			public async Task<GetByIdBrandResponse> Handle(GetByIdBrandCommand request, CancellationToken cancellationToken)
 			{
 				Brand? checkBrand = await _brandDal.GetAsync(

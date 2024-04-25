@@ -19,12 +19,5 @@
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="Features\Auth\Commands\Register\" />
-    <Folder Include="Features\Auth\Validations\" />
-    <Folder Include="Features\Auth\Rules\" />
-    <Folder Include="Features\Auth\Profiles\" />
-  </ItemGroup>
 
 </Project>

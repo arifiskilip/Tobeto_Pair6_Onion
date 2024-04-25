@@ -25,6 +25,16 @@ namespace Persistence
 			services.AddScoped<IModelDal, ModelDal>();
 			services.AddScoped<IModelService, ModelManager>();
 
+			services.AddScoped<IUserDal, UserDal>();
+			services.AddScoped<IUserService, UserManager>();
+
+			services.AddScoped<IUserOperationClaimDal, UserOperationClaimDal>();
+			services.AddScoped<IUserOperationClaimService, UserUserOperationClaimManager>();
+
+			services.AddScoped<IAuthService, AuthManager>();
+			services.AddScoped<IIndividualCustomerDal, IndividualCustomerDal>();
+			services.AddScoped<ICorporateCustomerDal, CorporateCustomerDal>();
+
 			return services;
 		}
 	}

@@ -1,14 +1,15 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features
 {
-	public class AddModelCommand : IRequest<AddModelResponse>
+	public class AddModelCommand : IRequest<AddModelResponse>, ISecuredRequest
 	{
 		public string Name { get; set; }
-
+		public string[] RequiredRoles => ["Admin", "Model.Write"];
 
 		public class AddModelCommandHandler : IRequestHandler<AddModelCommand, AddModelResponse>
 		{
